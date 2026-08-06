@@ -1,0 +1,30 @@
+---
+const title = "LucidConsult — AI Advisory for SMBs That Demands Clarity, Not Hype";
+const desc = "LucidConsult helps small and mid-size businesses cut through AI noise. Practical strategy, process automation, and hands-on implementation — at a price that makes sense.";
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content={desc}/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Open Graph -->
+  <meta property="og:title" content={title}/>
+  <meta property="og:description" content={desc}/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://lucidconsult.ai"/>
+</head>
+<body class="min-h-screen">
+  <slot/>
+  <script>
+    const obs = new IntersectionObserver((es) => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add("visible") }) }, { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
