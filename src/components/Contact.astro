@@ -76,33 +76,31 @@ const interestOptions = t(lang, "contact_interest_options").split(",");
   </div>
 </section>
 
-<div id="contact-msgs" data-success={t(lang, "contact_success")} data-error={t(lang, "contact_error")} data-net={t(lang, "contact_net_error")}></div>
-<script>
+<script is:inline>
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
-  const msgsEl = document.getElementById("contact-msgs");
-  const msgs = {
-    success: msgsEl?.dataset.success ?? "",
-    error: msgsEl?.dataset.error ?? "",
-    network: msgsEl?.dataset.net ?? "",
-  };
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      status.classList.add("hidden");
+      status.className = "hidden";
       const data = Object.fromEntries(new FormData(form).entries());
+      let ok = false;
       try {
         const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
-        const ok = res.ok;
-        status.classList.remove("hidden");
-        status.classList.toggle("bg-emerald-500/15 border border-emerald-400/30 text-emerald-300", ok);
-        status.classList.toggle("bg-red-500/15 border border-red-400/30 text-red-300", !ok);
-        status.textContent = ok ? msgs.success : msgs.error;
-        if (ok) form.reset();
-      } catch {
-        status.classList.remove("hidden");
-        status.classList.add("bg-red-500/15", "border", "border-red-400/30", "text-red-300");
-        status.textContent = msgs.network;
+        ok = res.ok;
+      } catch (err) {
+        console.error("Form submit error:", err);
+        status.className = "rounded-lg px-4 py-3 text-sm font-medium bg-red-500/15 border border-red-400/30 text-red-300";
+        status.textContent = "Network error. Please email us at info@lucidconsult.ai";
+        return;
+      }
+      if (ok) {
+        status.className = "rounded-lg px-4 py-3 text-sm font-medium bg-emerald-500/15 border border-emerald-400/30 text-emerald-300";
+        status.textContent = "Thanks! We'll be in touch within one business day.";
+        form.reset();
+      } else {
+        status.className = "rounded-lg px-4 py-3 text-sm font-medium bg-red-500/15 border border-red-400/30 text-red-300";
+        status.textContent = "Something went wrong. Please email us directly at info@lucidconsult.ai";
       }
     });
   }
