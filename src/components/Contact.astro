@@ -76,7 +76,7 @@ const interestOptions = t(lang, "contact_interest_options").split(",");
   </div>
 </section>
 
-<div id="contact-msgs" data-success={JSON.stringify(t(lang, "contact_success"))} data-error={JSON.stringify(t(lang, "contact_error"))} data-net={JSON.stringify(t(lang, "contact_net_error"))}></div>
+<div id="contact-msgs" data-success={t(lang, "contact_success")} data-error={t(lang, "contact_error")} data-net={t(lang, "contact_net_error")}></div>
 <script>
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
