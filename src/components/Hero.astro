@@ -1,3 +1,8 @@
+---
+import { t, type Lang } from "../i18n";
+const { lang = "en" as Lang } = Astro.props;
+---
+
 <section id="top" class="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
   <div class="grid-bg absolute inset-0 opacity-60"></div>
   <div class="absolute top-0 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-brand-500/10 blur-[120px]"></div>
@@ -5,42 +10,34 @@
   <div class="relative mx-auto max-w-6xl px-6 text-center">
     <p class="reveal mb-6 inline-flex items-center gap-2 rounded-full border border-brand-400/20 bg-brand-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-400">
       <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-400"></span>
-      SMB AI Advisory & Implementation
+      {t(lang, "hero_badge")}
     </p>
 
-    <h1 class="reveal mx-auto max-w-4xl font-display text-4xl font-bold leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
-      AI that actually<br/>
-      <span class="text-gradient">works for your business</span>
-    </h1>
+    <h1 class="reveal mx-auto max-w-4xl font-display text-4xl font-bold leading-tight tracking-tight text-white md:text-6xl lg:text-7xl" set:html={t(lang, "hero_title")} />
 
-    <p class="reveal mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-200 md:text-xl">
-      We help small and mid-size businesses adopt AI <em>without</em> the enterprise price tag,
-      the consultant jargon, or the 80% failure rate.
-      Practical strategy. Real implementation. Measurable results.
-    </p>
+    <p class="reveal mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-200 md:text-xl" set:html={t(lang, "hero_subtitle")} />
 
     <div class="reveal mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
       <a href="#contact" class="rounded-lg bg-brand-500 px-7 py-3.5 text-sm font-semibold text-white shadow-glow transition-all hover:bg-brand-600">
-        Book a Free Discovery Call
+        {t(lang, "hero_cta1")}
       </a>
       <a href="#why-ai" class="rounded-lg border border-white/15 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:border-brand-400/40 hover:text-brand-400">
-        See How It Works ↓
+        {t(lang, "hero_cta2")}
       </a>
     </div>
 
-    <!-- Pain point stats -->
     <div class="reveal mx-auto mt-16 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
       <div class="glass rounded-2xl px-4 py-6 text-center">
-        <div class="font-display text-3xl font-bold text-white">80%</div>
-        <div class="mt-1 text-xs text-ink-300">of AI projects fail<br/>(RAND 2025)</div>
+        <div class="font-display text-3xl font-bold text-white">{t(lang, "stat1_val")}</div>
+        <div class="mt-1 text-xs text-ink-300" set:html={t(lang, "stat1_label")}></div>
       </div>
       <div class="glass rounded-2xl px-4 py-6 text-center">
-        <div class="font-display text-3xl font-bold text-brand-400">~0%</div>
-        <div class="mt-1 text-xs text-ink-300">of SMBs have an<br/>AI strategy that works</div>
+        <div class="font-display text-3xl font-bold text-brand-400">{t(lang, "stat2_val")}</div>
+        <div class="mt-1 text-xs text-ink-300" set:html={t(lang, "stat2_label")}></div>
       </div>
       <div class="glass rounded-2xl px-4 py-6 text-center">
-        <div class="font-display text-3xl font-bold text-white">14-15%</div>
-        <div class="mt-1 text-xs text-ink-300">productivity gains when<br/>AI is done right</div>
+        <div class="font-display text-3xl font-bold text-white">{t(lang, "stat3_val")}</div>
+        <div class="mt-1 text-xs text-ink-300" set:html={t(lang, "stat3_label")}></div>
       </div>
     </div>
   </div>

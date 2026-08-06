@@ -1,21 +1,31 @@
+---
+import { t, type Lang } from "../i18n";
+const { lang = "en" as Lang } = Astro.props;
+const base = lang === "fr" ? "/fr/" : "/";
+const links = [
+  { href: "#why-ai", label: t(lang, "nav_why") },
+  { href: "#services", label: t(lang, "nav_services") },
+  { href: "#how", label: t(lang, "nav_how") },
+  { href: "#about", label: t(lang, "nav_about") },
+  { href: "#contact", label: t(lang, "nav_contact") },
+];
+---
+
 <footer class="border-t border-white/5 bg-ink-950 py-12">
   <div class="mx-auto max-w-6xl px-6">
     <div class="flex flex-col items-center justify-between gap-8 md:flex-row">
-      <a href="#top" class="flex items-center gap-2.5">
+      <a href={`${base}#top`} class="flex items-center gap-2.5">
         <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 font-display text-lg font-bold text-ink-950">L</span>
         <span class="font-display text-lg font-semibold text-white">Lucid<span class="text-brand-400">Consult</span></span>
       </a>
       <div class="flex flex-wrap items-center justify-center gap-6">
-        <a href="#why-ai" class="text-sm text-ink-300 transition-colors hover:text-white">Why AI</a>
-        <a href="#services" class="text-sm text-ink-300 transition-colors hover:text-white">Services</a>
-        <a href="#how" class="text-sm text-ink-300 transition-colors hover:text-white">How We Work</a>
-        <a href="#about" class="text-sm text-ink-300 transition-colors hover:text-white">About</a>
-        <a href="#contact" class="text-sm text-ink-300 transition-colors hover:text-white">Contact</a>
+        {links.map((l) => <a href={l.href} class="text-sm text-ink-300 transition-colors hover:text-white">{l.label}</a>)}
+        <a href={t(lang, "lang_url")} class="text-sm text-brand-400 transition-colors hover:text-brand-500">{t(lang, "lang_label")}</a>
       </div>
       <a href="mailto:info@lucidconsult.ai" class="text-sm font-medium text-brand-400 hover:text-brand-500">info@lucidconsult.ai</a>
     </div>
     <div class="mt-10 border-t border-white/5 pt-6 text-center text-xs text-ink-400">
-      &copy; {new Date().getFullYear()} Lucid Consulting. All rights reserved. &middot; <span class="text-ink-300">Clarity in a noisy world.</span>
+      &copy; {new Date().getFullYear()} Lucid Consulting. All rights reserved. &middot; <span class="text-ink-300">{t(lang, "footer_tagline")}</span>
     </div>
   </div>
 </footer>

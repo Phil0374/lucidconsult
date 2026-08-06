@@ -1,56 +1,27 @@
 ---
-const services = [
-  {
-    title: "AI Readiness Assessment",
-    desc: "A focused 2-3 week evaluation of your business operations. We identify the highest-impact AI opportunities, rank them by effort and ROI, and give you a clear, prioritized roadmap — not a 200-page report.",
-    deliverables: ["Process audit & opportunity map", "Ranked AI initiative list", "90-day action plan"],
-  },
-  {
-    title: "Process Automation",
-    desc: "We find and eliminate repetitive manual work. From invoice processing to customer onboarding, we build AI workflows that save hours per employee per week — and pay for themselves in months, not years.",
-    deliverables: ["Workflow automation design", "Tool selection & integration", "Training & handoff"],
-  },
-  {
-    title: "AI Tool Selection & Integration",
-    desc: "We cut through vendor hype and match you with tools that fit your budget, your team's skills, and your actual needs. No lock-in. No enterprise bloat. Just what works.",
-    deliverables: ["Vendor shortlist & evaluation", "Proof-of-concept testing", "Integration roadmap"],
-  },
-  {
-    title: "AI Strategy & Roadmap",
-    desc: "For businesses ready to make AI a competitive advantage. We build a practical strategy tied to business goals — with milestones you can measure and a budget you can afford.",
-    deliverables: ["AI strategy document", "Capability-building plan", "Quarterly progress targets"],
-  },
-  {
-    title: "Hands-On Implementation",
-    desc: "We don't just advise — we build. Whether it's a custom chatbot for customer support, an automated reporting pipeline, or an AI-assisted workflow tool, we ship working solutions.",
-    deliverables: ["Working AI solution", "Documentation & training", "30-day support period"],
-  },
-  {
-    title: "Team Upskilling & Workshops",
-    desc: "AI adoption fails when the team doesn't understand it. We run practical, jargon-free workshops that get your people comfortable and confident using AI in their daily work.",
-    deliverables: ["Custom workshop curriculum", "Hands-on exercises", "Reference playbook"],
-  },
-];
+import { t, type Lang } from "../i18n";
+const { lang = "en" as Lang } = Astro.props;
+const services = ["s1","s2","s3","s4","s5","s6"];
 ---
 
 <section id="services" class="relative py-20 md:py-28">
   <div class="mx-auto max-w-6xl px-6">
     <div class="reveal mb-14 max-w-2xl">
-      <p class="text-xs font-semibold uppercase tracking-widest text-brand-400">What We Do</p>
-      <h2 class="mt-3 font-display text-3xl font-bold text-white md:text-5xl">Practical AI services<br/><span class="text-gradient">built for your reality</span></h2>
-      <p class="mt-4 text-lg text-ink-200">Every engagement starts with listening. No boilerplate, no buzzword bingo — just focused expertise applied where it moves the needle.</p>
+      <p class="text-xs font-semibold uppercase tracking-widest text-brand-400">{t(lang, "services_badge")}</p>
+      <h2 class="mt-3 font-display text-3xl font-bold text-white md:text-5xl" set:html={t(lang, "services_title")} />
+      <p class="mt-4 text-lg text-ink-200">{t(lang, "services_subtitle")}</p>
     </div>
 
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {services.map((s) => (
         <div class="reveal glass rounded-2xl p-7 flex flex-col">
-          <h3 class="font-display text-lg font-semibold text-white">{s.title}</h3>
-          <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-200">{s.desc}</p>
+          <h3 class="font-display text-lg font-semibold text-white">{t(lang, `${s}_title`)}</h3>
+          <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-200">{t(lang, `${s}_desc`)}</p>
           <div class="mt-5 border-t border-white/5 pt-4">
-            {s.deliverables.map((d) => (
+            {[1,2,3].map((d) => (
               <div class="flex items-center gap-2 text-xs text-ink-300 mt-1.5">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 flex-shrink-0 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>
-                {d}
+                {t(lang, `${s}_d${d}`)}
               </div>
             ))}
           </div>
